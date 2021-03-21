@@ -1,6 +1,6 @@
-defmodule CheapGames do
+defmodule Games do
   @moduledoc """
-  Documentation for `CheapGames`.
+  Documentation for `Games`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule CheapGames do
 
   ## Examples
 
-      iex> CheapGames.hello()
+      iex> Games.hello()
       :world
 
   """

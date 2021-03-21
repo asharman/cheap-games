@@ -1,9 +1,9 @@
-defmodule CheapGames.MixProject do
+defmodule Games.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :cheap_games,
+      app: :games,
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
