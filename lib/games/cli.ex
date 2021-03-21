@@ -2,7 +2,9 @@ defmodule Games.CLI do
   @default_count 10
 
   def run(argv) do
-    parse_args(argv)
+    argv
+    |> parse_args()
+    |> process_args()
   end
 
   def parse_args(argv) do
@@ -20,4 +22,27 @@ defmodule Games.CLI do
   defp process_options({_, [title], _}), do: {title, @default_count}
 
   defp process_options(_), do: :help
+
+  defp process_args(:help) do
+    IO.puts("""
+    usage: games <title>
+
+    options:
+    --limit, -l: Sets the limit of games searched (Default: 10)
+    """)
+
+    System.halt(0)
+  end
+
+  defp process_args({title, limit}) do
+    Games.Game.fetch(title, limit)
+    |> decode_response
+  end
+
+  defp decode_response({:ok, body}), do: body
+
+  defp decode_response({:error, error}) do
+    IO.puts("Error fetching: #{error["message"]})")
+    System.halt(2)
+  end
 end
