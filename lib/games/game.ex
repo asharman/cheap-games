@@ -5,6 +5,11 @@ defmodule Games.Game do
     |> handle_response
   end
 
+  def sort_by_cheapest(list_of_games) do
+    list_of_games
+    |> Enum.sort(&(String.to_float(&1["cheapest"]) <= String.to_float(&2["cheapest"])))
+  end
+
   defp game_url(title, limit) do
     "https://www.cheapshark.com/api/1.0/games?title=#{title}&limit=#{limit}&exact=0"
   end

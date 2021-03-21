@@ -39,7 +39,9 @@ defmodule Games.CLI do
     |> decode_response
   end
 
-  defp decode_response({:ok, body}), do: body
+  defp decode_response({:ok, body}) do
+    Games.Game.sort_by_cheapest(body)
+  end
 
   defp decode_response({:error, error}) do
     IO.puts("Error fetching: #{error["message"]})")
