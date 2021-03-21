@@ -37,6 +37,7 @@ defmodule Games.CLI do
   defp process_args({title, limit}) do
     Games.Game.fetch(title, limit)
     |> decode_response
+    |> Games.TableFormatter.print_table_for_columns(["steamAppID", "cheapest", "external"])
   end
 
   defp decode_response({:ok, body}) do
