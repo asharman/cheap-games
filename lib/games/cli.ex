@@ -6,24 +6,18 @@ defmodule Games.CLI do
   end
 
   def parse_args(argv) do
-    parse =
-      OptionParser.parse(argv,
-        switches: [help: :boolean, limit: :integer],
-        aliases: [h: :help, l: :limit]
-      )
-
-    case parse do
-      {[help: true], _, _} ->
-        :help
-
-      {[limit: count], [title], _} ->
-        {title, count}
-
-      {_, [title], _} ->
-        {title, @default_count}
-
-      _ ->
-        :help
-    end
+    OptionParser.parse(argv,
+      switches: [help: :boolean, limit: :integer],
+      aliases: [h: :help, l: :limit]
+    )
+    |> process_options()
   end
+
+  defp process_options({[help: true], _, _}), do: :help
+
+  defp process_options({[limit: count], [title], _}), do: {title, count}
+
+  defp process_options({_, [title], _}), do: {title, @default_count}
+
+  defp process_options(_), do: :help
 end
