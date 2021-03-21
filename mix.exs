@@ -4,6 +4,7 @@ defmodule Games.MixProject do
   def project do
     [
       app: :games,
+      escript: escript_config(),
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
@@ -23,6 +24,12 @@ defmodule Games.MixProject do
     [
       {:httpoison, "~> 1.8"},
       {:jason, "~> 1.2"}
+    ]
+  end
+
+  defp escript_config do
+    [
+      main_module: Games.CLI
     ]
   end
 end
